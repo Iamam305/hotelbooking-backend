@@ -22,6 +22,12 @@ app.use('/api/user', AuthRoute)
 app.use('/api/hotel', HotelRoute)
 app.use('/api/rooms', AuthRoute)
 
+app.use((err, req, rez, next) =>{
+  const errStatus = err.status || 500
+  const errMessage = err.message || 'something went wrong'
+  return res.status(errStatus).json(errMessage)
+  next()
+})
 
 
 
